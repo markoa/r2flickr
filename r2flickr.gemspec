@@ -1,4 +1,5 @@
 Gem::Specification.new do |spec|
+	spec.author = 'Marko Anastasov'
 	spec.email = 'marko.anastasov@gmail.com'
 	spec.date = '2008.05.08'
 	spec.version = '0.1'
