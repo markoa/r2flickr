@@ -21,13 +21,7 @@ class Flickr::FileTokenCache < Flickr::BaseTokenCache
 	def load_token
 		token = nil
 		File.open(@cache_file,'r'){ |f| token = f.read }
-		# Dirt stupid check to see if it's probably XML or
-		# not.  If it is, then we don't call checkToken.
-		#
-		# Backwwards compatible with old token storage.
-		@token = token.include?('<') ?
-			Flickr::Token.from_xml(REXML::Document.new(token)) :
-			@token = checkToken(token)
+		@token = Flickr::Token.from_xml(REXML::Document.new(token))
 	rescue Errno::ENOENT
 		nil
 	end

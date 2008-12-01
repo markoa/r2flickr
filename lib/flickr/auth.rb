@@ -58,11 +58,4 @@ class Flickr::Auth < Flickr::APIBase
 		return @frob
 	end
 
-	def checkToken(token=nil)
-		token ||= @token
-		token = token.token if token.class == Flickr::Token
-		res = @flickr.call_unauth_method('flickr.auth.checkToken',
-			'auth_token' => token)
-		@token = Flickr::Token.from_xml(res)
-	end
 end
