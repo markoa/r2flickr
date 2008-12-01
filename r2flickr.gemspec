@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 		lib/flickr/reflection.rb
 		lib/flickr/tags.rb
 		lib/flickr/test.rb
+		lib/flickr/token_cache.rb
 		lib/flickr/transform.rb
 		lib/flickr/upload.rb
 		lib/flickr/urls.rb

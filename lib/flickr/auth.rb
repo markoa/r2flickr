@@ -1,23 +1,27 @@
 #!/usr/bin/env ruby
 
 require 'flickr/base'
+require 'flickr/token_cache'
 
 class Flickr::Auth < Flickr::APIBase
-	attr_accessor :cache_file, :token
+	attr_accessor :token_cache, :token
 
 	def clear_cache
 		@token = nil
 		@frob = nil
 	end
 
-	def initialize(flickr,cache_file=nil)
+	def initialize(flickr, token_cache=nil)
 		super(flickr)
 		@frob = nil
 		@token = nil
-		@cache_file = cache_file
-		if @cache_file && File.exists?(@cache_file)
-			load_token
+		@token_cache = case token_cache
+		when String
+			Flickr::FileTokenCache.new token_cache
+		else
+			token_cache
 		end
+		@token = @token_cache.load_token if @token_cache
 	end
 
 	def login_link(perms='delete')
@@ -31,27 +35,15 @@ class Flickr::Auth < Flickr::APIBase
 	def frob=(frob) @frob = frob end
 	def frob() return @frob || getFrob end
 
-	def cache_token
-		File.open(@cache_file,'w'){ |f| f.write @token.to_xml } if token
-	end
-
-	def load_token
-		token = nil
-		File.open(@cache_file,'r'){ |f| token = f.read }
-		# Dirt stupid check to see if it's probably XML or
-		# not.  If it is, then we don't call checkToken.
-		#
-		# Backwwards compatible with old token storage.
-		@token = token.include?('<') ?
-			Flickr::Token.from_xml(REXML::Document.new(token)) :
-			@token = checkToken(token)
-	end
-
 	def getToken(frob=nil)
 		frob ||= @frob
 		res=@flickr.call_unauth_method('flickr.auth.getToken',
 				'frob'=>frob)
 		@token = Flickr::Token.from_xml(res)
+	end
+
+	def cache_token
+		@token_cache.cache_token(@token) if @token_cache
 	end
 
 	def getFullToken(mini_token)
