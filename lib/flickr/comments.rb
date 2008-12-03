@@ -15,4 +15,10 @@ class Flickr::Comments < Flickr::APIBase
 			'comment_id' => comment_id)
 	end
 
+	def edit(comment_id, comment)
+		@flickr.call_method('flickr.photos.comments.editComment',
+			'comment_id' => comment_id, 'comment_text' => comment)
+	end
+
+
 end
