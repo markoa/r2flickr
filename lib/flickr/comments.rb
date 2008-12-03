@@ -10,4 +10,9 @@ class Flickr::Comments < Flickr::APIBase
 		xml.attributes['id']
 	end
 
+	def delete(comment_id)
+		@flickr.call_method('flickr.photos.comments.deleteComment',
+			'comment_id' => comment_id)
+	end
+
 end
