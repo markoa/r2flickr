@@ -793,3 +793,21 @@ class Flickr::PhotoPool < Array
 		return pool
 	end
 end
+
+class Flickr::Comment
+	attr_accessor :id, :authorid, :authorname, :datecreated, :permalink, :text
+
+	def self.from_xml(xml, flickr=nil)
+		att = xml.attributes
+		c = new
+		c.id = att['id']
+		c.authorid = att['author']
+		c.authorname = att['authorname']
+		c.datecreated = Time.at(att['datecreate'].to_i)
+		c.permalink = att['permalink']
+		c.text = xml.text
+		c
+	end
+
+end
+

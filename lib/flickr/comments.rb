@@ -20,5 +20,16 @@ class Flickr::Comments < Flickr::APIBase
 			'comment_id' => comment_id, 'comment_text' => comment)
 	end
 
+	def list(photo)
+		photo = photo.id if photo.class == Flickr::Photo
+		res = @flickr.call_method('flickr.photos.comments.getList',
+			'photo_id' => photo)
+		rv = []
+		res.elements['//comments'].each_element do |e|
+			rv << Flickr::Comment.from_xml(e, @flickr)
+		end
+		rv
+	end
+
 
 end
