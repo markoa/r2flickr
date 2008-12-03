@@ -110,6 +110,7 @@ class Flickr
 		@photosets = nil
 		@test = nil
 		@urls = nil
+		@comments = nil
 
 		@ticket_by_id = {}
 		@person_by_nsid = {}
@@ -133,6 +134,7 @@ class Flickr
 	def test() @test ||= Test.new(self) end
 	def urls() @urls ||= Urls.new(self) end
 	def tags() @tags ||= Tags.new(self) end
+	def comments() @comments ||= Comments.new(self) end
 	def interestingness() @interestingness ||= Interestingness.new(self) end
 
 	def call_method(method,args={})
