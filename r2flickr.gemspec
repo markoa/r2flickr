@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 		lib/flickr/transform.rb
 		lib/flickr/upload.rb
 		lib/flickr/urls.rb
+		lib/flickr/comments.rb
 		lib/flickr.rb
 		examples/album_test.rb
 		examples/comics-reorder.rb
