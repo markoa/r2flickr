@@ -247,37 +247,18 @@ class Flickr::Photos < Flickr::APIBase
 		@flickr.call_method('flickr.photos.setMeta',args)
 	end
 
-	def search(user=nil,tags=nil,tag_mode=nil,text=nil,min_upload_date=nil,
-		max_upload_date=nil,min_taken_date=nil,max_taken_date=nil,
-		license=nil,extras=nil,per_page=nil,page=nil,sort=nil)
-	
-		user = user.nsid if user.respond_to?(:nsid)
-		tags = tags.join(',') if tags.class == Array
-		min_upload_date = min_upload_date.to_i if
-			min_upload_date.class == Time
-		max_upload_date = max_upload_date.to_i if
-			max_upload_date.class == Time
-		min_taken_date = @flickr.mysql_datetime(min_taken_date) if
-			min_taken_date.class == Time
-		max_taken_date = @flickr.mysql_datetime(max_taken_date) if
-			max_taken_date.class == Time
-		license = license.id if license.class == Flickr::License
-		extras = extras.join(',') if extras.class == Array
-
-		args = {}
-		args['user_id'] = user if user
-		args['tags'] = tags if tags
-		args['tag_mode'] = tag_mode if tag_mode
-		args['text'] = text if text
-		args['min_upload_date'] = min_upload_date if min_upload_date
-		args['max_upload_date'] = max_upload_date if max_upload_date
-		args['min_taken_date'] = min_taken_date if min_taken_date
-		args['max_taken_date'] = max_taken_date if max_taken_date
-		args['license'] = license if license
-		args['extras'] = extras if extras
-		args['per_page'] = per_page if per_page
-		args['page'] = page if page
-		args['sort'] = sort if sort
+	def search(args)
+		args[:user_id] = args[:user_id].nsid if args[:user_id].respond_to?(:nsid)
+		args[:tags] = args[:tags].join(',') if args[:tags].class == Array
+		[:min_upload_date, :max_upload_date].each do |k|
+			args[k] = args[k].to_i if args[k].is_a? Time
+		end
+		[:min_taken_date, :max_taken_date].each do |k|
+			args[k] = @flickr.mysql_datetime(args[k]) if args[k].is_a? Time
+		end
+		args[:license] = args[:license].id if args[:license].is_a? Flickr::License
+		args[:extras] = args[:extras].join(',') if args[:extras].is_a? Array
+		args.each {|k,v| v = args.delete(k); args[k.to_s] = v}
 
 		res = @flickr.call_method('flickr.photos.search',args)
 		return Flickr::PhotoList.from_xml(res,@flickr)
