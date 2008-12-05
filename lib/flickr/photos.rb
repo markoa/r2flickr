@@ -260,7 +260,21 @@ class Flickr::Photos < Flickr::APIBase
 		args[:extras] = args[:extras].join(',') if args[:extras].is_a? Array
 		args.each {|k,v| v = args.delete(k); args[k.to_s] = v}
 
-		res = @flickr.call_method('flickr.photos.search',args)
-		return Flickr::PhotoList.from_xml(res,@flickr)
+		if block_given?
+			thispage = 1
+			maxpages = 2
+			args['per_page'] ||= 500
+			until thispage > maxpages do
+				args['page'] = thispage
+				res = @flickr.call_method('flickr.photos.search',args)
+				list = Flickr::PhotoList.from_xml(res, @flickr)
+				maxpages = list.pages
+				list.each {|p| yield p}
+				thispage += 1
+			end
+		else
+			res = @flickr.call_method('flickr.photos.search',args)
+			return Flickr::PhotoList.from_xml(res,@flickr)
+		end
 	end
 end
