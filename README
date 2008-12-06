@@ -9,7 +9,8 @@ You first need to get an API key as explained here:
 http://www.flickr.com/services/api/misc.api_keys.html
 
 You'll need to authorize your application's API key for each account
-which you want to access.
+which you want to access. The authentication process is described on:
+http://www.flickr.com/services/api/auth.spec.html
 
 Here is a sample you can use to get started:
 
