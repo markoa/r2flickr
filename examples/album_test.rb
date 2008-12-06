@@ -15,10 +15,10 @@ set = sets.find{|s| s.title == setname} # May be nil, we handle that later.
 set &&= set.fetch
 t3 = Time.now
 set.each do |photo|
-	str =<<EOF
+  str =<<EOF
 <a href="#{photo.url}"><img src="#{photo.url('s')}" alt="#{photo.title}"></a>
 EOF
-	print str.strip+' '
+  print str.strip+' '
 end
 t4 = Time.now
 
