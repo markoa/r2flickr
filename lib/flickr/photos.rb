@@ -1,5 +1,13 @@
 require 'flickr/base'
 
+begin
+	# Did not exist in 1.8.6
+	StopIteration
+rescue NameError
+	class StopIteration < Exception
+	end
+end
+
 class Flickr::Photos < Flickr::APIBase
 	def upload
 	require 'flickr/upload'
@@ -276,5 +284,7 @@ class Flickr::Photos < Flickr::APIBase
 			res = @flickr.call_method('flickr.photos.search',args)
 			return Flickr::PhotoList.from_xml(res,@flickr)
 		end
+	rescue StopIteration
+		nil
 	end
 end
