@@ -35,7 +35,7 @@ class Flickr::Photos < Flickr::APIBase
 		photo = photo.id if photo.class == Flickr::Photo
 		tstr = tags.join(',')
 		@flickr.call_method('flickr.photos.addTags',
-			'photo' => photo, 'tags' => tstr)
+			'photo_id' => photo, 'tags' => tstr)
 	end
 
 	def removeTag(tag)
