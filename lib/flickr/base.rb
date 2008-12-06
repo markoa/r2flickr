@@ -394,8 +394,7 @@ class Flickr::Photo
   def url(size=nil)
     base = 'http://static.flickr.com'
     ext = (size == 'o') ? self.originalformat : 'jpg'
-    return size ? "#{base}/#@server/#{@id}_#{@secret}_#{size}.#{ext}"
-                : "#{base}/#@server/#{@id}_#{@secret}.jpg"
+    return size ? "#{base}/#@server/#{@id}_#{@secret}_#{size}.#{ext}" : "#{base}/#@server/#{@id}_#{@secret}.jpg"
   end
 
   def delete() @flickr.photos.delete(self) end
