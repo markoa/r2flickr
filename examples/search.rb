@@ -12,5 +12,6 @@ photos = flickr.photos.search(:text => query,
 for photo in photos
   puts photo.title()
   puts photo.url()
+  puts flickr.photos.getInfo(photo).description
   puts
 end

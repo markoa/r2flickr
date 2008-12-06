@@ -642,7 +642,7 @@ class Flickr::Note
 
   def author() @author_id && @flickr.people.getInfo(@author_id) end
 
-  def from_xml(xml,photo=nil)
+  def self.from_xml(xml,photo=nil)
     att = xml.attributes
     note = Flickr::Note.new(att['x'].to_i,att['y'].to_i,
                             att['w'].to_i,att['h'].to_i,xml.text,
