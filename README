@@ -1,8 +1,9 @@
 r2flickr is a Ruby implementation of the Flickr API.
 
-It is a fork of the last release of rflickr, which is no longer maintained.
+It is a fork of rflickr, which is no longer maintained.
 
-There are a few example scripts in the examples directory.
+The Flickr API reference is on:
+http://www.flickr.com/services/api/
 
 You first need to get an API key as explained here:
 http://www.flickr.com/services/api/misc.api_keys.html
@@ -39,4 +40,10 @@ For convenience, you can set your API_KEY and SHARED_SECRET in the
 installed version of flickr/base.rb rather than including it in every
 application.
 
-[1] http://rubyforge.org/projects/rflickr/
+http://github.com/markoa/r2flickr/tree/master
+
+Developers:
+
+Trevor Schroeder (rflickr author)
+Marko Anastasov
+Dustin Sallings
