@@ -1,0 +1,56 @@
+h1. r2flickr
+
+A Ruby implementation of the Flickr API.
+
+It is a fork of "rflickr":http://rubyforge.org/projects/rflickr/, which is no longer maintained.
+
+h2. Getting started
+
+ * "Example scripts":http://github.com/markoa/r2flickr/tree/master/examples/
+
+ * "The Flickr API reference":http://www.flickr.com/services/api/
+
+h2. API authentication
+
+ * "Explanation on how to obtain an API key":http://www.flickr.com/services/api/misc.api_keys.html
+
+You'll need to authorize your application's API key for each account which you want to access. The process is described on the "Flickr Authentication API page":http://www.flickr.com/services/api/auth.spec.html.
+
+Here is a sample you can use to get started:
+
+<pre><code>flickr = Flickr.new(token_cache_file, MY_APPLICATION_KEY, MY_SHARED_SECRET)
+
+unless flickr.auth.token
+  flickr.auth.getFrob
+  url = @flickr.auth.login_link
+  puts "You must visit #{url} to authorize this application. Press enter " \
+    "when you have done so. This is the only time you will have to do this."
+  gets
+  flickr.auth.getToken
+  flickr.auth.cache_token
+end
+
+# do flickr stuff now</code></pre>
+
+The general idea is that once you cache the token, the user will not have to reauthorize your application unless the file where the token is cached (the first argument to the new method on Flickr) is deleted.
+
+When you create a new Flickr instance and pass in a file path to the cached token, the API will attempt to load the token from the file. If found and loaded, the Flickr instance's auth.token is present. If the token could not be found in the file specified, then the instance's auth.token will be nil, and you will have to have the user authorize
+the application before it can be used.
+
+For convenience, you can set your API_KEY and SHARED_SECRET in the installed version of flickr/base.rb rather than including it in every application.
+
+h2. Source
+
+http://github.com/markoa/r2flickr
+
+<pre><code>git clone git://github.com/markoa/r2flickr.git</pre></code>
+
+h2. Authors
+
+ * Trevor Schroeder (rflickr author)
+ * "Marko Anastasov":http://github.com/markoa
+ * "Dustin Sallings":http://github.com/dustin
+
+h2. License
+
+GPL
