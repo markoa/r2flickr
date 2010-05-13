@@ -43,7 +43,7 @@ h2. Source
 
 http://github.com/markoa/r2flickr
 
-<pre><code>git clone git://github.com/markoa/r2flickr.git</pre></code>
+<pre><code>git clone git://github.com/markoa/r2flickr.git</code></pre>
 
 h2. Authors
 
