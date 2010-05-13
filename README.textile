@@ -4,11 +4,19 @@ A Ruby implementation of the Flickr API.
 
 It is a fork of "rflickr":http://rubyforge.org/projects/rflickr/, which is no longer maintained.
 
-h2. Getting started
+Includes a faithful reproduction of the published API as well as method encapsulation to provide more useful object mappings. As rflickr, it features result caching to improve performance, with addition to some bug fixes in the API implementation.
+
+h2. Installation
+
+<pre><code>sudo gem install r2flickr</code></pre>
+
+h2. Documentation
+
+ * "RDoc":http://rdoc.info/projects/markoa/r2flickr
 
  * "Example scripts":http://github.com/markoa/r2flickr/tree/master/examples/
 
- * "The Flickr API reference":http://www.flickr.com/services/api/
+ * "The Flickr API reference":http://www.flickr.com/services/api/ –  look here for detailed explanation of methods and parameters
 
 h2. API authentication
 
@@ -45,6 +53,12 @@ http://github.com/markoa/r2flickr
 
 <pre><code>git clone git://github.com/markoa/r2flickr.git</code></pre>
 
+h2. Contributing
+
+If you find a bug, you can report it through the "issues":http://github.com/markoa/r2flickr/issues interface.
+
+Feel free to fork, write code and send a pull request.
+
 h2. Authors
 
  * Trevor Schroeder (rflickr author)
@@ -53,4 +67,4 @@ h2. Authors
 
 h2. License
 
-GPL
+GPL. See LICENSE file for details.
