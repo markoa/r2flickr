@@ -2,7 +2,7 @@ Gem::Specification.new do |spec|
 	spec.author = 'Marko Anastasov'
 	spec.email = 'marko.anastasov@gmail.com'
 	spec.date = '2010-05-13'
-	spec.version = '0.2'
+	spec.version = '0.2.1'
 	spec.name = 'r2flickr'
 	spec.has_rdoc = false
 	spec.homepage = 'http://github.com/markoa/r2flickr/'
